@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+.gradient {
+	background-image: url(gradient.png);
+	background-repeat: repeat-x;
+}
+.panel #form1 textarea {
+	margin-left: 50px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	width:360px;
+	color: #FF751E;
+	background-color: #CCCCCC;
+	font-weight: bold;
+	text-align: center;
+}
+
+
+.panel {
+	background-image: url(resources/panel.jpg);
+	background-repeat:no-repeat;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #FFFFFF;
+	font-weight: bolder;
+	text-transform: uppercase;
+	font-variant: normal;
+	font-stretch: normal;
+	list-style-type: none;
+	right: 10px;
+	margin-left:100px;
+	height:1200px;
+}
+
+.container { position: relative; left: 1px; top: 1px; color: #666; }
+.text { position: absolute; left: -1px; top: -1px; color: #FFFFFF;} 	
+.panel #form1 table {
+	margin-left:50px;
+    height:500px;	
+	font-family: Verdana, Arial, Helvetica, sans-serif;	
+}
+.panel #submitButton {
+	margin-left: 150px;
+}
+.inputTextField {
+	width: 273px;
+}
+td input { width: 100% }
+
+
+-->
+</style>
+<script src="http://www.nextdb.net/api.js"></script>
+<script>
+	var inputElementNamesAndIDs = new Array("fname", "lname","email","emailConfirm","pwd","pwdConfirm", "username", "captcha", "challengeResponse");
+	var errorGearElementIDs = new Array("error-fname", "error-lname","error-email","error-emailConfirm","error-pwd","error-pwdConfirm", "error-username", "error-captcha", "error-challengeResponse");
+    function insertData(){
+		if(!validInputs(inputElementNamesAndIDs)){	
+		    document.getElementById("instructions").value = "Please complete all fields.";
+			return;
+		}
+		if(!confirmInputsMatch()){
+			return;
+		}
+        var conn = new net.nextdb.Connection("geoff","widgetDemo");
+        var insert = new net.nextdb.Insert("USER");
+
+        var values = net.nextdb.Util.formParser(document.getElementById("form1"));
+        insert.setParameters(values);
+        conn.executeInsert(insert,
+                function(rowId,error){
+                        if(error){
+                                document.getElementById("instructions").value = error.message;
+                                //net.nextdb.Util.print(error.toString());
+								if(error.causedBy){		
+								  document.getElementById("error-"+error.causedBy.toLowerCase()).innerHTML = "<img src='resources/animated-gear.gif'>";
+								  if(120 == error.code){ //constraints violation
+								    	document.getElementById("instructions").value = "The value you entered is already in use. Please pick a different value.";
+								  }
+								}else{
+									if(110 == error.code){ //wrong captcha
+									   	document.getElementById("error-captcha").innerHTML = "<img src='resources/animated-gear.gif'>";
+									}
+								}
+                        } else { //success
+                             document.getElementById("instructions").value = "THANK YOU. Your request succeeded!";
+							 document.getElementById("captchaImg").src = "http://www.nextdb.net/nextdb/captcha?width=220&height=60&"+Math.random(); 
+							 clearAllInputs(inputElementNamesAndIDs);  
+                        }
+                }
+        );	
+	}
+	function validInputs(namesAndIDs){
+	   var ok = true;
+	   var i;
+	   for(i=0;i<namesAndIDs.length;i++){
+	   		var element =document.getElementsByName(namesAndIDs[i])[0];
+			if(null == element){
+				element = document.getElementById(namesAndIDs[i]);
+			}
+	   		if("" == element.value){//user did not fill in the field
+				ok = false;
+				var errorElement = document.getElementById("error-"+namesAndIDs[i]);
+				errorElement.innerHTML  = "<img src='resources/animated-gear.gif'>"; //put a spinning gear next the omitted input
+			}
+	   }
+	   return ok;
+	}
+	function confirmInputsMatch(){
+		if(document.getElementById("emailConfirm").value != document.getElementsByName("email")[0].value){
+			document.getElementById("error-emailConfirm").innerHTML = "<img src='resources/animated-gear.gif'>";
+ 			document.getElementById("instructions").value = "The email addresses you entered don't match.";			
+			return false;
+		}	
+		if(document.getElementById("pwdConfirm").value != document.getElementsByName("pwd")[0].value){
+			document.getElementById("error-pwdConfirm").innerHTML = "<img src='resources/animated-gear.gif'>";
+			document.getElementById("instructions").value = "The passwords you entered don't match.";
+			return false;
+		}		
+		return true;
+	}
+	function buttonPressed(){
+		document.getElementById("submitButton").src ="resources/button-3-down.png";	
+		clearAllErrors(errorGearElementIDs);
+	}
+	function buttonReleased(){
+		document.getElementById("submitButton").src="resources/button-3-up.png";	
+	}	
+	function buttonOver(){
+		 document.getElementById("submitButton").src="resources/button-3-over.png";	
+	}
+	function clearAllInputs(namesAndIDs){ 
+	   var i;
+	   for(i=0;i<namesAndIDs.length;i++){
+	   		var element =document.getElementsByName(namesAndIDs[i])[0];
+			if(null == element){
+				element = document.getElementById(namesAndIDs[i]);
+			}
+			element.value = "";
+			
+	   }	
+	
+	}
+	function clearAllErrors(errorElements){
+		var i;
+	   	for(i=0;i<errorElements.length;i++){
+			var element = document.getElementById(errorElements[i]);
+			element.innerHTML = "";
+			
+	   	}				
+	}
+	
+</script>
+</head>
+
+<body>
+<div class="panel">
+  <p>&nbsp;</p>
+
+  <form id="form1" name="form1" method="post" action="">
+    <textarea id="instructions" cols="30" rows="2" readonly="readonly">Please complete the following form.</textarea>
+    <table width="444" border="0" >
+
+	<tr>
+      <td width="117" scope="row" > <font class="container">First name<font color="#FFFFFF" class="text">First name</font></font>    </td>
+      <td width="220"><input name="fname" type="text" /></td>
+  	  <td id="error-fname"><!--img src="resources/animated-gear.gif" alt="erorr"/--></td>
+	</tr>
+
+	<tr>
+      <td width="117" scope="row"> <font class="container">Last name<font color="#FFFFFF" class="text">Last name</font></font>    </td>
+      <td width="220"><input name="lname" type="text" /></td>
+	  <td id="error-lname"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+
+	</tr>
+
+	<tr>
+      <td width="117" scope="row"> <font class="container">email<font color="#FFFFFF" class="text">email</font></font>    </td>
+      <td width="220"><input name="email" type="text" /></td>
+      <td id="error-email"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+
+	</tr>
+	<tr>
+      <td width="117" scope="row"> <font class="container">email (confirm)<font color="#FFFFFF" class="text">email (confirm)</font></font>    </td>
+      <td width="220"><input  id="emailConfirm" type="text" /></td>
+	  <td id="error-emailConfirm"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+	</tr>
+	<tr>
+      <td width="117" scope="row"> <font class="container">username<font color="#FFFFFF" class="text">username</font></font>    </td>
+      <td width="220"><input name="username" type="text" /></td>
+      <td id="error-username"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+	</tr>	
+	<tr>
+      <td width="117" scope="row"> <font class="container">password<font color="#FFFFFF" class="text">password</font></font>    </td>
+      <td width="220"><input name="pwd" type="password" /></td>
+      <td id="error-pwd"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+	</tr>	
+	<tr>
+      <td width="117" scope="row"> <font class="container">password (confirm)<font color="#FFFFFF" class="text">password (confirm)</font></font>    </td>
+      <td width="220"><input  id="pwdConfirm" type="password" /></td>
+      <td id="error-pwdConfirm"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+	</tr>
+	<tr>
+	  <td width="30"><img src="resources/refresh2.png" onclick="document.getElementById('captchaImg').src='http://www.nextdb.net/nextdb/captcha?width=220&height=60&'+Math.random();"/></td>
+	  <td width="220"><img id="captchaImg" src="http://www.nextdb.net/nextdb/captcha?width=220&height=60" /></td>
+	</tr>		
+
+	<tr>
+      <td width="117" scope="row"> <font class="container">CAPTCHA<font color="#FFFFFF" class="text">CAPTCHA</font></font>    </td>
+      <td width="220"><input name="captcha" type="text" /></td>
+      <td id="error-captcha"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+	</tr>					
+	<tr>
+      <td width="117" scope="row"> <font class="container">challenge question<font color="#FFFFFF" class="text">challenge question</font></font>    </td>
+      <td ><p>
+        <select name="challengeQuestion">
+          <option>favorite city</option>
+          <option>favorite color</option>
+          <option>favorite album</option>
+          <label>
+          abcdefg
+          </label>
+        </select>
+      </p>        </td>
+      <td >&nbsp;</td>
+	</tr>
+	<tr>
+      <td width="117" scope="row"> <font class="container">challenge Answer<font color="#FFFFFF" class="text">challenge Answer</font></font>    </td>
+      <td width="220"><input name="challengeResponse" type="text" /></td>
+      <td id="error-challengeResponse"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+	</tr>			
+  </table>
+</form>
+
+
+
+    <img name="imageField" id="submitButton" src="resources/button-3-up.png"  onclick="insertData();" onmousedown="buttonPressed();" onmouseup="buttonReleased();" onmouseover="buttonOver();" onmouseout="buttonReleased();"/>
+
+
+  <p>
+</div>
+</body>
+</html>
