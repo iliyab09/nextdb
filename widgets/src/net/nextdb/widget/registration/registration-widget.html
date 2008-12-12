@@ -57,8 +57,8 @@ td input { width: 100% }
 </style>
 <script src="http://www.nextdb.net/api.js"></script>
 <script>
-	var inputElementNamesAndIDs = new Array("fname", "lname","email","emailConfirm","pwd","pwdConfirm", "username", "captcha", "challengeResponse");
-	var errorGearElementIDs = new Array("error-fname", "error-lname","error-email","error-emailConfirm","error-pwd","error-pwdConfirm", "error-username", "error-captcha", "error-challengeResponse");
+	var inputElementNamesAndIDs = new Array("fname", "lname","email","emailConfirm","pwd","pwdConfirm", "username", "captcha", "challengeresponse");
+	var errorGearElementIDs = new Array("error-fname", "error-lname","error-email","error-emailConfirm","error-pwd","error-pwdConfirm", "error-username", "error-captcha", "error-challengeresponse");
     function insertData(){
 		if(!validInputs(inputElementNamesAndIDs)){	
 		    document.getElementById("instructions").value = "Please complete all fields.";
@@ -70,7 +70,7 @@ td input { width: 100% }
         var conn = new net.nextdb.Connection("geoff","widgetDemo");
         var insert = new net.nextdb.Insert("USER");
 
-        var values = net.nextdb.Util.formParser(document.getElementById("form1"));
+        var values = net.nextdb.Util.parseForm(document.getElementById("form1"));
         insert.setParameters(values);
         conn.executeInsert(insert,
                 function(rowId,error){
@@ -218,7 +218,7 @@ td input { width: 100% }
 	<tr>
       <td width="117" scope="row"> <font class="container">challenge question<font color="#FFFFFF" class="text">challenge question</font></font>    </td>
       <td ><p>
-        <select name="challengeQuestion">
+        <select name="challenge_question">
           <option>favorite city</option>
           <option>favorite color</option>
           <option>favorite album</option>
@@ -231,8 +231,8 @@ td input { width: 100% }
 	</tr>
 	<tr>
       <td width="117" scope="row"> <font class="container">challenge Answer<font color="#FFFFFF" class="text">challenge Answer</font></font>    </td>
-      <td width="220"><input name="challengeResponse" type="text" /></td>
-      <td id="error-challengeResponse"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
+      <td width="220"><input name="challengeresponse" type="text" /></td>
+      <td id="error-challengeresponse"><!--img src="resources/animated-gear.gif" alt="erorr" /--></td>
 	</tr>			
   </table>
 </form>
