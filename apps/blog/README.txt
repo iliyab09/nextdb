@@ -7,7 +7,7 @@ To use this system you need to get an alpha account from NextDB.net.  It is easy
 
 With your NextDB.net alpha account you need to follow these steps:
 
-		1. login to the admin pages with you username and password
+		1. login to the admin pages with your username and password
 
 		2. create a new database by clicking the create database link, you can name it whatever you like.
 
