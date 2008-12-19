@@ -1,0 +1,148 @@
+.mod{
+	width:400px;
+	margin-top:20px;
+	margin-left:20px;
+	margin-right:20px;
+}
+.mod0 {
+	background:transparent url('img/bg_mod_bot_400.png') no-repeat scroll left bottom;
+}
+.mod1 {
+	background:transparent url('img/bg_mod_top_400.png') no-repeat scroll left top;
+	margin-bottom:15px;
+	padding-bottom:6px;
+	padding-top:6px;
+}
+.mod2 {
+	border-color:#E1D4C0 rgb(225, 212, 192) rgb(245, 237, 227);
+	border-bottom-width:0pt;
+	border-top-width:0pt;
+	border-style:solid;
+	border-width:0pt 2px 1px;
+	padding:2px 10px;
+	overflow:hidden;
+}
+.viewbloghr{
+	width:600px;
+	color:#cccccc;
+}
+body{
+	
+	background:url('img/demo-blog-bg.gif');
+	background-color:#f5ede3;
+}
+.viewblog{
+	border:1px solid #cccccc;
+	padding:6px;
+	background-color:#ffffff;
+	width:600px;
+	font-size:9pt;
+	font-family:"Trebuchet MS",Helvetica,Arial,Verdana;
+	text-align:left;
+}
+div.date {
+	border:0px;
+	color:#777777;
+}
+table.bordered{
+	border:2px solid #cccccc;
+}
+.blogname{
+	font-weight:bold;
+}
+.title{
+	width:600px;
+	border:1px solid #333333;
+	background:#ffffff;
+	font-size:9pt;
+	font-family:"Trebuchet MS",Helvetica,Arial,Verdana;
+	color:#333333;
+	padding:6px;
+}
+
+tr.odd{
+	background-color:#f5ede3;
+}
+tr.even{
+	background:#e4d8c5;
+}
+.myaccount{
+	padding:3px;
+	color:#ffffff;
+}
+.edit-delete{
+	vertical-align:baseline;
+	background-color:#e6e6e6;
+	font-family:arial;
+	font-size:8pt;
+	vertical-align:top;
+}
+.panel{
+	padding:4px;
+	background-color:#ece7d4;
+}
+.nav{
+	width:900px;
+	position:relative;
+}
+.stretch{
+	padding:0px;
+	background-color:#ece7d4;
+	text-align:left;
+	width:900px;
+	position:relative;
+}
+.content{
+	padding:0px;
+	background-color:#f5ede3;
+	text-align:left;
+	width:900px;
+	height:500px;
+	position:relative;
+}
+body{
+	background-color:#666666;
+	font-size:10pt;
+	font-family:"Trebuchet MS",Helvetica,Arial,Verdana;
+	color: #333333;
+}
+a{
+	font-size:10pt;
+	font-family:"Trebuchet MS",Helvetica,Arial,Verdana;
+	color: #6699cc;
+	padding:3px;
+}
+a.nav{
+	font-size:10pt;
+	font-family:"Trebuchet MS",Helvetica,Arial,Verdana;
+	color: #e1d8b7;
+}
+.login{
+position:absolute;
+	background-color:#cccccc;
+	width:256px;
+	padding:4px;
+	border:1px solid #666666;
+}
+input {
+	font-size:9pt;
+	font-family:"Trebuchet MS",Helvetica,Arial,Verdana;
+	background-color:#eeeeee;
+	color:#6699cc;
+	padding:1px;
+	font-weight:500;
+	border-top:2px ridge #B0D248;
+	border-left:2px ridge #B0D248;
+	border-bottom:1px ridge #B0D248;
+	border-right:1px ridge #B0D248;
+}
+input.checkbox{
+	height:15px;
+	width:15px;
+	background-color:red;
+}
+div.errors {
+	color:red;
+	font-family:"Trebuchet MS",Helvetica,Arial,Verdana;
+	font-size:10pt;
+}
