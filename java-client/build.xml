@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="nextdb.net" basedir="." default="jar">
+    <property name="src" value="src"/>
+    <property name="output" value="classes"/>
+
+    <target name="compile" depends="create">
+        <javac destdir="${output}">            
+            <src path="${src}"/>            
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="nextdb-client-0.0.1.jar">
+            <fileset dir="${output}"/>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${output}"/>
+    </target>
+
+    <target name="create" depends="clean">
+        <mkdir dir="${output}"/>
+    </target>
+
+    <target name="test" depends="jar">
+       <java classname="net.nextdb.client.Examples" fork="true" >
+         <classpath>
+           <pathelement location="nextdb-client-0.0.1.jar"/>
+         </classpath>
+       </java>      
+    </target>
+</project>
+
+
