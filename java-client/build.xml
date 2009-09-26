@@ -1,26 +1,28 @@
 <?xml version="1.0"?>
 <project name="nextdb.net" basedir="." default="jar">
     <property name="src" value="src"/>
-    <property name="output" value="classes"/>
+    <property name="classes" value="classes"/>
+    <property name="lib" value="lib"/>
 
     <target name="compile" depends="create">
-        <javac destdir="${output}">            
+        <javac destdir="${classes}">            
             <src path="${src}"/>            
         </javac>
     </target>
 
     <target name="jar" depends="compile">
-        <jar destfile="nextdb-client-0.0.1.jar">
-            <fileset dir="${output}"/>
+        <jar destfile="${lib}/nextdb-client-0.0.1.jar">
+            <fileset dir="${classes}"/>
         </jar>
     </target>
 
     <target name="clean">
-        <delete dir="${output}"/>
+        <delete dir="${classes}"/>
     </target>
 
     <target name="create" depends="clean">
-        <mkdir dir="${output}"/>
+        <mkdir dir="${classes}"/>
+        <mkdir dir="${lib}"/>
     </target>
 
     <target name="test" depends="jar">
@@ -31,5 +33,3 @@
        </java>      
     </target>
 </project>
-
-
