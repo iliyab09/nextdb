@@ -9,6 +9,14 @@ public class Connection {
     private String accountName;
     private String databaseName;
     private String host = "http://www.nextdb.net/nextdb/service";
+    /**
+     * this determines whether the network request is fired in the same thread
+     * as a blocking call (good for use with Servlets & JSP pages).  Or whether
+     * the network call is made in a separate thread, which is advisable for
+     * clients such as clients where you do not want to make network calls in
+     * the main UI thread-- J2ME and Android for instance.
+     */
+    private boolean async=false;
 
     /**
      * account and database names
@@ -26,9 +34,13 @@ public class Connection {
      * @param callback
      */
     public void execute(Query query, Callback callback) {
-        Async runner = new Async(Util.buildURL(this, query), callback);
-        Thread thread = new Thread(runner);
-        thread.start();
+        Request request = new Request(Util.buildURL(this, query), callback);
+        if(async){
+            Thread thread = new Thread(request);
+            thread.start();
+        } else {
+            request.send();
+        }
     }
 
     /**
@@ -37,9 +49,13 @@ public class Connection {
      * @param callback
      */
     public void execute(Insert insert, Callback callback) {
-        Async runner = new Async(Util.buildURL(this, insert), callback);
-        Thread thread = new Thread(runner);
-        thread.start();
+        Request request = new Request(Util.buildURL(this, insert), callback);
+        if(async){
+            Thread thread = new Thread(request);
+            thread.start();
+        } else {
+            request.send();
+        }
     }
 
     /**
@@ -48,9 +64,13 @@ public class Connection {
      * @param callback
      */
     public void execute(Update update, Callback callback) {
-        Async runner = new Async(Util.buildURL(this, update), callback);
-        Thread thread = new Thread(runner);
-        thread.start();
+        Request request = new Request(Util.buildURL(this, update), callback);
+        if(async){
+            Thread thread = new Thread(request);
+            thread.start();
+        } else {
+            request.send();
+        }
     }
 
     /**
@@ -59,32 +79,68 @@ public class Connection {
      * @param callback
      */
     public void execute(Delete delete, Callback callback) {
-        Async runner = new Async(Util.buildURL(this, delete), callback);
-        Thread thread = new Thread(runner);
-        thread.start();
+        Request request = new Request(Util.buildURL(this, delete), callback);
+        if(async){
+            Thread thread = new Thread(request);
+            thread.start();
+        } else {
+            request.send();
+        }
     }
 
+    /**
+     * @return the accountName
+     */
     public String getAccountName() {
         return accountName;
     }
 
+    /**
+     * @param accountName the accountName to set
+     */
     public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
 
+    /**
+     * @return the databaseName
+     */
     public String getDatabaseName() {
         return databaseName;
     }
 
+    /**
+     * @param databaseName the databaseName to set
+     */
     public void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
     }
 
+    /**
+     * @return the host
+     */
     public String getHost() {
         return host;
     }
 
+    /**
+     * @param host the host to set
+     */
     public void setHost(String host) {
         this.host = host;
+    }
+
+    /**
+     * @return the async
+     */
+    public boolean isAsync() {
+        return async;
+    }
+
+    /**
+     * @param async the async to set
+     */
+    public void setAsync(boolean async) {
+        this.async = async;
     }
 }
