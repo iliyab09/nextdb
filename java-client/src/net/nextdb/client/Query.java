@@ -6,6 +6,9 @@ package net.nextdb.client;
 
 import java.util.HashMap;
 
+/**
+ * Query data
+ */
 public class Query {
 
     private String name;
@@ -23,35 +26,60 @@ public class Query {
 	  this.params = params;
     }
 
+    /**
+     * @return the name
+     */
     public String getName() {
-	  return name;
+        return name;
     }
 
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
-	  this.name = name;
+        this.name = name;
     }
 
-    public String getStartAfterPK() {
-	  return startAfterPK;
-    }
-
-    public void setStartAfterPK(String startAfterPK) {
-	  this.startAfterPK = startAfterPK;
-    }
-
-    public String getStartAfterValue() {
-	  return startAfterValue;
-    }
-
-    public void setStartAfterValue(String startAfterValue) {
-	  this.startAfterValue = startAfterValue;
-    }
-
+    /**
+     * @return the params
+     */
     public HashMap getParams() {
-	  return params;
+        return params;
     }
 
+    /**
+     * @param params the params to set
+     */
     public void setParams(HashMap params) {
-	  this.params = params;
+        this.params = params;
     }
+
+    /**
+     * @return the startAfterPK
+     */
+    public String getStartAfterPK() {
+        return startAfterPK;
+    }
+
+    /**
+     * @param startAfterPK the startAfterPK to set
+     */
+    public void setStartAfterPK(String startAfterPK) {
+        this.startAfterPK = startAfterPK;
+    }
+
+    /**
+     * @return the startAfterValue
+     */
+    public String getStartAfterValue() {
+        return startAfterValue;
+    }
+
+    /**
+     * @param startAfterValue the startAfterValue to set
+     */
+    public void setStartAfterValue(String startAfterValue) {
+        this.startAfterValue = startAfterValue;
+    }
+
 }

@@ -9,7 +9,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import org.json.JSONObject;
-
+/**
+ * Used with each database operation
+ */
 public class Request implements Runnable {
 
     private String request;

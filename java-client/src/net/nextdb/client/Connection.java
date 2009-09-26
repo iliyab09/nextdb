@@ -3,20 +3,16 @@
  * @author Brent Hamby
  */
 package net.nextdb.client;
-
+/**
+ * Connection takes Queries, Inserts, Updates and Deletes and runs them either
+ * in threaded mode or serial mode.
+ */
 public class Connection {
 
     private String accountName;
     private String databaseName;
     private String host = "http://www.nextdb.net/nextdb/service";
-    /**
-     * this determines whether the network request is fired in the same thread
-     * as a blocking call (good for use with Servlets & JSP pages).  Or whether
-     * the network call is made in a separate thread, which is advisable for
-     * clients such as clients where you do not want to make network calls in
-     * the main UI thread-- J2ME and Android for instance.
-     */
-    private boolean async=false;
+    private boolean async = false;
 
     /**
      * account and database names
@@ -29,13 +25,13 @@ public class Connection {
     }
 
     /**
-     * execute query (spawns a new thread)
+     * execute query will spawn a new thread if called in async mode, otherwise the network request will block in the same calling thread.  Use async==true on mobile devices to keep the UI thread from block, use async==false for JSP pages and Servlets.
      * @param query
      * @param callback
      */
     public void execute(Query query, Callback callback) {
         Request request = new Request(Util.buildURL(this, query), callback);
-        if(async){
+        if (async) {
             Thread thread = new Thread(request);
             thread.start();
         } else {
@@ -44,13 +40,13 @@ public class Connection {
     }
 
     /**
-     * execute insert (spawns a new thread)
+     * execute insert will spawn a new thread if called in async mode, otherwise the network request will block in the same calling thread.  Use async==true on mobile devices to keep the UI thread from block, use async==false for JSP pages and Servlets.
      * @param insert
      * @param callback
      */
     public void execute(Insert insert, Callback callback) {
         Request request = new Request(Util.buildURL(this, insert), callback);
-        if(async){
+        if (async) {
             Thread thread = new Thread(request);
             thread.start();
         } else {
@@ -59,13 +55,13 @@ public class Connection {
     }
 
     /**
-     * execute update (spawns a new thread)
+     * execute update will spawn a new thread if called in async mode, otherwise the network request will block in the same calling thread.  Use async==true on mobile devices to keep the UI thread from block, use async==false for JSP pages and Servlets.
      * @param update
      * @param callback
      */
     public void execute(Update update, Callback callback) {
         Request request = new Request(Util.buildURL(this, update), callback);
-        if(async){
+        if (async) {
             Thread thread = new Thread(request);
             thread.start();
         } else {
@@ -74,13 +70,13 @@ public class Connection {
     }
 
     /**
-     * execute delete (spawns a new thread)
+     * execute delete will spawn a new thread if called in async mode, otherwise the network request will block in the same calling thread.  Use async==true on mobile devices to keep the UI thread from block, use async==false for JSP pages and Servlets.
      * @param delete
      * @param callback
      */
     public void execute(Delete delete, Callback callback) {
         Request request = new Request(Util.buildURL(this, delete), callback);
-        if(async){
+        if (async) {
             Thread thread = new Thread(request);
             thread.start();
         } else {
@@ -138,6 +134,12 @@ public class Connection {
     }
 
     /**
+     * this determines whether the network request is fired in the same thread
+     * as a blocking call (good for use with Servlets & JSP pages).  Or whether
+     * the network call is made in a separate thread, which is advisable for
+     * clients such as clients where you do not want to make network calls in
+     * the main UI thread-- J2ME and Android for instance.
+     * default value is false
      * @param async the async to set
      */
     public void setAsync(boolean async) {

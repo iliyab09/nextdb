@@ -5,7 +5,9 @@
 package net.nextdb.client;
 
 import java.util.HashMap;
-
+/**
+ * Updating data
+ */
 public class Update {
 
     private String tableName;
@@ -30,27 +32,46 @@ public class Update {
         this.params = params;
     }
 
-    public HashMap getParams() {
-        return params;
+    /**
+     * @return the tableName
+     */
+    public String getTableName() {
+        return tableName;
     }
 
-    public void setParams(HashMap params) {
-        this.params = params;
+    /**
+     * @param tableName the tableName to set
+     */
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
+    /**
+     * @return the rowId
+     */
     public String getRowId() {
         return rowId;
     }
 
+    /**
+     * @param rowId the rowId to set
+     */
     public void setRowId(String rowId) {
         this.rowId = rowId;
     }
 
-    public String getTableName() {
-        return tableName;
+    /**
+     * @return the params
+     */
+    public HashMap getParams() {
+        return params;
     }
-    
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
+
+    /**
+     * @param params the params to set
+     */
+    public void setParams(HashMap params) {
+        this.params = params;
     }
+
 }

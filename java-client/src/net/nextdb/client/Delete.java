@@ -4,6 +4,9 @@
  */
 package net.nextdb.client;
 
+/**
+ * Delete data
+ */
 public class Delete {
 
     private String tableName;
@@ -21,21 +24,32 @@ public class Delete {
         this.rowId = rowId;
     }
 
-    public String getRowId() {
-        return rowId;
-    }
-
-    public void setRowId(String rowId) {
-        this.rowId = rowId;
-    }
-
+    /**
+     * @return the tableName
+     */
     public String getTableName() {
         return tableName;
     }
 
+    /**
+     * @param tableName the tableName to set
+     */
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
-    
+
+    /**
+     * @return the rowId
+     */
+    public String getRowId() {
+        return rowId;
+    }
+
+    /**
+     * @param rowId the rowId to set
+     */
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
+    }
 
 }

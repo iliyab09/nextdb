@@ -13,7 +13,6 @@ public class Examples {
 
     private static Connection conn = new Connection("nextdb-example","SAMPLEDB");
 
-
     /**
      * simple insert example that calls query example in callback
      */
@@ -152,7 +151,6 @@ public class Examples {
         }));
 
     }
-
 
     public static void main(String args[]){
         Examples examples = new Examples();

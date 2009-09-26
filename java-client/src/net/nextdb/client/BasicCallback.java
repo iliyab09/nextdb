@@ -5,7 +5,9 @@
 package net.nextdb.client;
 
 import org.json.JSONObject;
-
+/**
+ * Basic implementation for Callback, but flexible enough for most common uses.
+ */
 public class BasicCallback implements Callback{
 
     private JSONObject json;
