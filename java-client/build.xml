@@ -1,13 +1,38 @@
 <?xml version="1.0"?>
 <project name="nextdb.net" basedir="." default="jar">
     <property name="src" value="src"/>
+    <property name="resources" value="resources"/>
     <property name="classes" value="classes"/>
+    <property name="docs" value="docs"/>
     <property name="lib" value="lib"/>
 
     <target name="compile" depends="create">
         <javac destdir="${classes}">            
             <src path="${src}"/>            
         </javac>
+    </target>
+    
+    <target name="doc" depends="compile">
+        <mkdir dir="${docs}"/>
+		<javadoc
+		destdir="docs/"
+		author="true"
+		stylesheetfile="${resources}/docs.css"
+		Overview="${resources}/overview.html"
+		version="true"
+		use="true"
+		windowtitle="NextDB.net Java Client API">
+			<packageset dir="src"/>
+			<doctitle><![CDATA[<img src="img/nextdb.gif">]]></doctitle>
+			<bottom><![CDATA[<i>Copyright &#169; 2009 NextDB.net. All Rights Reserved.</i>]]></bottom>
+			<group title="NextDB Java Client API" packages="net.*"/>
+			<group title="JSON Utils" packages="org.*"/>
+			<link href="http://www.nextdb.net"/>
+		</javadoc>
+        <mkdir dir="${docs}/img"/>
+        <copy todir="${docs}/img">
+            <fileset dir="${resources}/img"/>
+        </copy>
     </target>
 
     <target name="jar" depends="compile">
@@ -16,19 +41,21 @@
         </jar>
     </target>
 
-    <target name="clean">
-        <delete dir="${classes}"/>
-    </target>
-
     <target name="create" depends="clean">
         <mkdir dir="${classes}"/>
         <mkdir dir="${lib}"/>
     </target>
 
+    <target name="clean">
+        <delete dir="${classes}"/>
+        <delete dir="${docs}"/>
+        <delete dir="${lib}"/>
+    </target>
+
     <target name="test" depends="jar">
        <java classname="net.nextdb.client.Examples" fork="true" >
          <classpath>
-           <pathelement location="nextdb-client-0.0.1.jar"/>
+           <pathelement location="lib/nextdb-client-0.0.1.jar"/>
          </classpath>
        </java>      
     </target>
