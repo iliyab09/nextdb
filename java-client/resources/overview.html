@@ -1,0 +1,82 @@
+<head>
+<title>
+NextDB JavaScript API documentation
+</title>
+<link href="http://www.nextdb.net/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://www.nextdb.net/pretty/prettify.js"></script>
+<script>
+function init() {
+	prettyPrint();
+}
+</script>
+</head>
+<body bgcolor="white" onload="init()">
+
+<body>
+This documentation explains the NextDB.net Java client API.  If you are looking for the NextDB.net JavaScript API please refer to <a href="http://www.nextdb.net/docs">http://www.nextdb.net/docs</a>.
+You can get the source code for this API at:
+<blockquote>
+<a href="http://code.google.com/p/nextdb/source/browse/trunk/java-client/">http://code.google.com/p/nextdb/source/browse/trunk/java-client/</a>
+</blockquote>
+<p>
+This API is designed for Java programmers who are looking to hook their application to a hosted cloud database service.
+<p>
+This API is ideal for JSP developers to easily data enable their pages.  Used in conjunction with our JavaScript API, certain elements of the page can be rendered on the server, will other more dynamic elements can be rendered on the client using AJAX techniques with our JavaScript API.   
+This API also works on Android and with a few minor tweaks it can work on J2ME.  
+<p>
+The general design of this API is similar to the NextDB JavaScript API.  There is a Callback interface that you need to implement to handle the JSON responses from the server.  Or you can use the BasicCallback implementation class.  The JSON data that is returned is parsed into the JSON.org Java libraries.  
+<p>
+The Connection class allows for both synchronous and asynchronous communication styles.  If you are using JSP, you need to make the calls synchronous.  If you are building a mobile app or a desktop app, you will want to make the calls asynchronous, or at least have a separate thread for the network calls.
+<p>
+This is a basic example from the Examples class in the API.  Example.java will run if you hit the test target in the ant file for the code base.  It runs a series of nested callback based calls to the database demonstrating Inserts, Updates, Deletes and Queries.  It is a great place to get started.
+<pre class="prettyprint">
+Connection conn = new Connection("nextdb-example","SAMPLEDB");
+Query query = new Query("TEST_TABLE_QUERY");
+conn.execute(query, (new Callback() {
+	public void handleResponse(JSONObject json, Error e) {
+		if (e != null) {
+			System.out.println(e.getMessage());
+		} else {
+			try {
+				System.out.println(json.toString(4));
+			} catch (JSONException err) {
+				err.printStackTrace();
+			}
+		}
+	}
+}));
+</pre>
+<p>
+The API also has a jsp folder with a simple example of rendering your data into web pages.  Here is a code snippet from the JSP example:
+<pre class="prettyprint">
+&lt;%@page import="net.nextdb.client.*"%&gt;
+&lt;%@page import="org.json.*"%&gt;
+&lt;%@page contentType="text/html" pageEncoding="UTF-8"%&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;NextDB.net JSP Page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;%
+        Connection conn = new Connection("nextdb-example","SAMPLEDB");
+        // make calls block (if you don't do this the page will render before the call returns)
+        conn.setAsync(false);
+        Query query = new Query("TEST_TABLE_QUERY");
+        BasicCallback callback = new BasicCallback();
+        conn.execute(query, callback);
+        JSONObject json = callback.getJson();
+        JSONArray rs =  ((JSONArray) json.get("rs"));
+        // loop throug results
+        for(int i=0;i&lt;rs.length();i++){%&gt;
+            &lt;b&gt;
+            &lt;%= ((JSONObject)((JSONObject)rs.get(i)).get("TEST_TABLE")).getString("name") %&gt;
+            &lt;/b&gt;
+            &lt;hr/&gt;
+        &lt;%}%&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+<p>
+
+</body>

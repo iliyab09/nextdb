@@ -1,0 +1,87 @@
+/* JSDoc style sheet */
+
+/* Define colors, fonts and other style attributes here to override the defaults */
+
+/* Page background color */
+body {
+	background-color:#ffffff;
+    color:#333333;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+td {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+ul { list-style-image: url("arrow.gif") }
+pre{
+	padding:10px;
+	background-color:#eee;
+	border:1px solid #a7a7a7;
+	font-size: 10pt;
+}
+
+a:link, a:visited{
+    color:#008F00;
+    font-size: 9pt;
+}
+a:hover{
+    text-decoration: none;
+    font-size: 9pt;
+}
+
+div.code{
+	 background: #cccccc;
+	 padding: 6px;
+	 border:thin inset #cccccc;
+	 font-family:courier;
+	 font-size: 10pt;
+	 font-weight:normal;
+}
+
+
+/* Table colors */
+.TableHeadingColor     { 
+	background:#ffffff url('img/docs-bg.jpg') repeat scroll 0% 0%;
+}
+
+.TableSubHeadingColor  { background-color: #eeeeee } /* Light mauve */
+.TableRowColor         { } 
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { font-size: 10pt;  }
+.FrameHeadingFont { font-size: 10pt;  }
+.FrameItemFont    { font-size: 10pt;  }
+
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { 
+	background:#ffffff url('img/docs-bg.jpg') repeat scroll 0% 0%;
+}
+
+.NavBarCell2    { 
+		padding:2px;
+		color:#333333;
+		background:transparent;
+}
+
+.NavBarCell1Rev { 
+		background-color:#ffffff;
+}
+.NavBarFont1    {}
+.NavBarFont1Rev {}
+
+.NavBarCell2    {}
+.NavBarCell3    {}
+
+.jsdoc_ctime    {font-size: 9pt;
+                    text-align: right
+}
+
+/* Sourcecode view */
+.sourceview { background: #eeeeee }
+.attrib { color: #9E004A }
+.comment { color: #00999E }
+.reserved { color: #004A9E }
+.literal { color: #009E54 }
+
