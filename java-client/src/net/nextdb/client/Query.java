@@ -15,6 +15,7 @@ public class Query {
     private HashMap params;
     private String startAfterPK="0";
     private String startAfterValue="now";
+    private int pageSize=1000;
     
     public Query() {
     }
@@ -80,6 +81,14 @@ public class Query {
      */
     public void setStartAfterValue(String startAfterValue) {
         this.startAfterValue = startAfterValue;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
 }

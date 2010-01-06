@@ -45,6 +45,7 @@ public class Util {
         url.append("name=" + query.getName() + "&");
         url.append("startAfterPK=" + query.getStartAfterPK() + "&");
         url.append("startAfterValue=" + query.getStartAfterValue() + "&");
+        url.append("pageSize=" + query.getPageSize() + "&");
 
         if (query.getParams() != null) {
             Set set = query.getParams().entrySet();
