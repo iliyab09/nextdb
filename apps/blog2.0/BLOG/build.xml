@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<project name="nextdb.net" basedir="." default="compile">
+
+    <property name="src" value="js"/>
+    <property name="code_name" value="code.js"/>
+    <property name="code_min_name" value="code.min.js"/>
+    <property name="release_file" value="blog-assets/blog.js"/>
+    <property name="release_file_editor" value="blog-assets/blog-editor.js"/>
+    <property name="tools" value="tools"/>
+
+	<!--
+	
+		makes single uncompressed js file in the build folder
+	
+	-->
+    <target name="compile" depends="clean">
+		<!-- loads in correct order -->
+        <concat destfile="${code_name}">
+            <filelist id="code">
+                <file name="${src}/account.js"/>
+                <file name="${src}/db.js"/>
+                <file name="${src}/ui.js"/>
+                <file name="${src}/main.js"/>
+                <file name="${src}/editor.js"/>
+            </filelist>
+        </concat>
+    </target>
+
+
+
+	<!-- 
+	
+	release: build and minify the api.js
+	
+	 -->
+    <target name="release" depends="compile">
+        <yuicompress munge="true" infile="${code_name}" outfile="${code_min_name}" />
+        <echo message="making file sets"/>
+        <fileset id="jquery" dir="js/jquery-ui/js">
+            <filename name="jquery-1.4.2.min.js"/>
+        </fileset>
+        <fileset id="nextdb" dir="js">
+            <filename name="nextdb.js"/>
+        </fileset>
+        <fileset id="code_min" dir="">
+            <filename name="${code_min_name}"/>
+        </fileset>
+        <fileset id="code" dir="">
+            <filename name="${code_name}"/>
+        </fileset>
+        <fileset id="code_header" dir="js">
+            <filename name="header.js"/>
+        </fileset>
+        <echo message="concating into final release"/>
+        <concat destfile="${release_file}" fixlastline="yes">
+            <fileset refId="nextdb"/>
+        </concat>
+        <concat destfile="${release_file}" append="yes" fixlastline="yes">
+            <fileset refId="jquery"/>
+        </concat>
+        <concat destfile="${release_file}" append="yes" fixlastline="yes">
+            <fileset refId="code_header"/>
+        </concat>
+        <concat destfile="${release_file}" append="yes" fixlastline="yes">
+            <fileset refId="code_min"/>
+        </concat>
+        <delete>
+            <fileset refId="code"/>
+        </delete>
+        <delete>
+            <fileset refId="code_min"/>
+        </delete>
+    </target>
+
+
+    <target name="release_editor" depends="compresseditor">
+        <echo message="concating into final release of rich text editor"/>
+        <fileset id="yui" dir="js">
+            <filename name="yui.js"/>
+        </fileset>
+        <fileset id="yui_nextdb" dir="js">
+            <filename name="editor-nextdb-min.js"/>
+        </fileset>
+        <fileset id="editor_callback" dir="js">
+            <filename name="editor-load-callback.js"/>
+        </fileset>
+        <echo message="concating into final release"/>
+        <concat destfile="${release_file_editor}" fixlastline="yes">
+            <fileset refId="yui"/>
+        </concat>
+        <concat destfile="${release_file_editor}" append="yes" fixlastline="yes">
+            <fileset refId="yui_nextdb"/>
+        </concat>
+        <concat destfile="${release_file_editor}" append="yes" fixlastline="yes">
+            <fileset refId="editor_callback"/>
+        </concat>
+    </target>
+    <target name="compresseditor">
+        <yuicompress munge="true" infile="js/yui/build/editor/editor-nextdb.js" outfile="js/editor-nextdb-min.js" />
+    </target>
+
+    <!-- deletes the build folder only -->
+    <target name="clean">
+        <delete dir="${release_file}"/>
+    </target>
+
+    <!-- YUI compressor task, part of the js-doc-buildtools -->
+    <taskdef name="yuicompress"
+        classname="com.moxiecode.ant.tasks.YuiCompressTask"
+        classpath="${tools}/js_build_tools.jar;${tools}/yuicompressor-2.3.2.jar" />
+
+
+</project>

@@ -1,0 +1,222 @@
+/*
+    yui css
+*/
+.yui-skin-sam .yui-toolbar-container .yui-toolbar-editcode span.yui-toolbar-icon {
+    background-image: url( img/html_editor.gif );
+    background-position: 0 1px;
+    left: 5px;
+}
+.yui-skin-sam .yui-toolbar-container .yui-button-editcode-selected span.yui-toolbar-icon {
+    background-image: url( img/html_editor.gif );
+    background-position: 0 1px;
+    left: 5px;
+}
+.editor-hidden {
+    visibility: hidden;
+    top: -9999px;
+    left: -9999px;
+    position: absolute;
+}
+textarea {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+.yui-toolbar-group-insertitem {
+    *width: auto; 
+}
+
+/*
+    nextdb css
+*/
+
+#main_page_title{
+    color:#fff;
+    font-family:"Georgia","Times New Roman",Times,serif;
+    font-size:24pt;
+}
+
+a{
+    color:#448EC4;
+    text-decoration:none;
+}
+body {
+    margin:0;
+    padding:0;
+}
+
+
+/*
+    classes
+*/
+.small_circle{
+    height:12px;
+    width:12px;
+}
+.nextdb_page_container{
+    top:0px;
+    position:relative;
+}
+.nextdb_page_header{
+    display:none;
+    height:35px;
+    background-color:gray;
+    width:100%
+}
+.nextdb_page_banner{
+    background-color:#448EC4;
+    padding-top:1px;
+    height:60px;
+    width:100%;
+    color:#fff;
+    margin-bottom:10px;
+}
+.nextdb_page_body{
+    border:0px solid green;
+    width:840px;
+    text-align:left;
+}
+
+#nextdb_blog_view{
+        position:relative;
+}
+    #nextdb_blog_search{
+        position:relative;
+        display:block;
+        height:37px;
+    }
+    #nextdb_blog_entries{
+        float:left;
+        width:600px;
+        border:0px solid red;
+    }
+        .blog_entry{
+            padding:15px;
+            border:6px solid #ccc;
+            -moz-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            -moz-box-shadow: 10px 10px 20px #666;
+            -webkit-box-shadow: 10px 10px 20px #666;
+            width:550px;
+            box-shadow: 10px 10px 20px #666;
+            margin-bottom:30px;
+        }
+    #nextdb_blog_entries_right_panel{
+        float:right;
+        padding:10px;
+        border:3px solid #ccc;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-box-shadow: 5px 5px 10px #666;
+        -webkit-box-shadow: 5px 5px 10px #666;
+        width:200px;
+        box-shadow: 5px 5px 10px #666;
+
+    }
+
+
+
+/* entries */
+.blog_title{
+    font-family:"Georgia","Times New Roman",Times,serif;
+    font-size:24pt;
+    border-bottom:1px solid #ccc;
+}
+.blog_body{
+    padding-top:8px;
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+}
+.blog_foot{
+    float:right;
+    display:block;
+    padding:5px;
+}
+.blog_date{
+    color:#888;
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+    font-weight:normal;
+    padding:10px;
+    color:#888;
+    font-size:10px;
+}
+/* comments */
+.blog_comment{
+    border-top:1px solid #ccc;
+    padding:12px;
+    margin-top:10px;
+}
+.blog_comment_form{
+    border-top:1px solid #ccc;
+}
+
+
+/*
+    id's
+*/
+#nextdb_blog_search_form{
+    float:right;
+    position:relative;
+    height:37px;
+}
+    #nextdb_blog_search_term{
+        padding:3px;
+        border:2px solid #aaa;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+    }
+    #nextdb_blog_search_btn{
+        height:35px;
+        border:0 none;
+        position:absolute;
+        right:-18px;
+        top:-1px;
+        width:35px;
+        background:transparent url(img/searchglass.png) no-repeat scroll 0 0;
+        background-position:0 -36px;
+    }
+    #nextdb_blog_search_btn:hover{
+        background-position:0 0px;
+    }
+
+    
+#nextdb_login_btn{
+    position:absolute;
+    top:0px;
+    left:0px;
+    border:1px solid #ccc;
+    height:30px;
+    width:60px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+}
+#blog_editor_messages{
+    color:#aa0000;
+}
+#blog_title{
+    padding:3px;
+}
+#blog_title_panel{
+    padding:20px;
+}
+
+
+
+
+
+#nextdb_about_title{
+    color:#448EC4;
+    font-family:"Georgia","Times New Roman",Times,serif;
+    font-size:12px;
+    font-weight:bold;
+    border-bottom:1px solid #ccc;
+    margin-bottom:4px;
+}
+#nextdb_about_panel{
+    padding:4px;
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+    font-size:10px;
+    color:#333;
+    line-height:1.3;
+}
