@@ -1,7 +1,7 @@
 
 
 db = {
-
+    loginName : "jman",
     conn : new net.nextdb.Connection('newdev','NEW_BLOG'),
 //    conn : new net.nextdb.Connection('adamhuntercaldwell.com','SITE'),
     init : function(){
@@ -21,13 +21,13 @@ db = {
 
     getPosts : function(callback){
         var query = new net.nextdb.Query("GET_BLOG_ENTRIES");
-        query.setParameters({login:"jman"});
+        query.setParameters({login:db.loginName});
         query.setStartAfterValue("now")
         db.conn.executeQuery(query,callback);
     },
     getPostsWithSearchTerm : function(term,callback){
         var query = new net.nextdb.Query("GET_BLOG_ENTRIES_WITH_SEARCH");
-        query.setParameters({login:"jman",searchTerm:term});
+        query.setParameters({login:db.loginName,searchTerm:term});
         query.setStartAfterValue("now")
         db.conn.executeQuery(query,callback);
     },
