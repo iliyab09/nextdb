@@ -21,13 +21,13 @@ db = {
 
     getPosts : function(callback){
         var query = new net.nextdb.Query("GET_BLOG_ENTRIES");
-        query.setParameters({login:"brent"});
+        query.setParameters({login:"jman"});
         query.setStartAfterValue("now")
         db.conn.executeQuery(query,callback);
     },
     getPostsWithSearchTerm : function(term,callback){
         var query = new net.nextdb.Query("GET_BLOG_ENTRIES_WITH_SEARCH");
-        query.setParameters({login:"brent",searchTerm:term});
+        query.setParameters({login:"jman",searchTerm:term});
         query.setStartAfterValue("now")
         db.conn.executeQuery(query,callback);
     },
